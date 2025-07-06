@@ -1,0 +1,11 @@
+
+[tool.ruff]
+# Same as Black's line length
+line-length = 88
+target-version = "py311"  # adjust to your Python version
+
+[tool.ruff.format]
+# Use double quotes for strings
+quote-style = "double"
+# Indent with spaces
+indent-style = "space"
