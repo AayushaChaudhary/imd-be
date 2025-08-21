@@ -16,14 +16,25 @@ class Settings(BaseSettings):
     host: str = Field(default="0.0.0.0", env="HOST")
     port: int = Field(default=10000, env="PORT")
 
-    # Database settings
-    database_url: str = Field(env="DATABASE_URL")
+    
+    database_url: str = Field(
+        default="sqlite+aiosqlite:///./music_recommender.db", env="DATABASE_URL"
+    )
     database_echo: bool = Field(default=False, env="DATABASE_ECHO")
+    
 
     # Data source settings
     data_source: str = Field(default="csv", env="DATA_SOURCE")
     csv_file_path: str = Field(default="data/dataset.csv", env="CSV_FILE_PATH")
     max_csv_rows: Optional[int] = Field(default=20000, env="MAX_CSV_ROWS")
+
+    # Security & JWT settings
+    # To generate a good secret key, run: openssl rand -hex 32
+    secret_key: str = Field(env="SECRET_KEY")
+    access_token_expire_minutes: int = Field(
+        default=30, env="ACCESS_TOKEN_EXPIRE_MINUTES"
+    )
+    algorithm: str = "HS256"
 
     # CORS settings
     cors_origins: Union[List[str], str] = Field(
